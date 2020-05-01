@@ -10,7 +10,6 @@ class UsersController < ApplicationController
        render json: user, except: [:updated_at, :created_at]
     end
 
-
     def user_params
         params.require(:user).permit(:name, :age, :location, :email)
     end
