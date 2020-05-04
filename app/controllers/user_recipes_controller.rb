@@ -1,7 +1,8 @@
 class UserRecipesController < ApplicationController
     def index
         user_recipes = UserRecipe.all
-        render json: user_recipes, except: [:updated_at, :created_at]
+        render json: user_recipes, except: [:updated_at, :created_at],
+        include: [:user, :recipe]
     end
 
     def create
