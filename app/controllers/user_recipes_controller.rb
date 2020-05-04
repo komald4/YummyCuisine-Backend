@@ -1,23 +1,24 @@
 class UserRecipesController < ApplicationController
-    def create
-        userrecipes = UserRecipe.create(userrecipe_params)
-        render json: userrecipe, except: [:updated_at, :created_at]
-    end
-    
     def index
-        userrecipes = UserRecipe.all
-        render :json => userrecipe, :include => ['student', 'doctor']
+        user_recipes = UserRecipe.all
+        render json: user_recipes, except: [:updated_at, :created_at]
     end
 
+    def create
+        userrecipe = UserRecipe.create(userrecipe_params)
+        render json: user_recipe, except: [:updated_at, :created_at]
+    end
+    
+
     def destroy
-        @userrecipe = UserRecipe.find(params[:id])
-        @userrecipe.destroy
-        render json: @userrecipe, except: [:updated_at, :created_at]
+        user_recipe = UserRecipe.find(params[:id])
+        user_recipe.destroy
+        render json: user_recipe, except: [:updated_at, :created_at]
     end
 
     private
+
     def userrecipe_params
-        params.require(:userrecipe).permit(:id, :student_id, :doctor_id, :start_date, :length, :accepted)
+        params.require(:user_recipe).permit(:id, :user_id, :recipe_id, :favorites, :likes)
     end
-end
 end
